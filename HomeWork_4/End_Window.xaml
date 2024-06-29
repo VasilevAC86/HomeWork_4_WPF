@@ -1,0 +1,50 @@
+﻿<Window Icon="Resources/icon.png" ResizeMode="NoResize" x:Class="HomeWork_4.End_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork_4"
+        mc:Ignorable="d"
+        Title="Список дел" Height="450" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" FontSize="26" HorizontalAlignment="Left">
+            Список дел
+        </Label>
+        <DataGrid Name="DataToDoList" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                  CanUserAddRows="False" AutoGenerateColumns="False">            
+                <DataGrid.Columns>                
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                            <CheckBox Name="checkboxToDo" Checked="CheckboxEnableToDo_Checked" 
+                                      Unchecked="CheckboxEnableToDo_Unchecked" IsChecked="{Binding Path=Doing}"/>
+                        </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>                
+                <DataGridTextColumn Width="1.75*" Binding="{Binding Path=Title}"/>
+                <DataGridTextColumn Width="1*" Binding="{Binding Path=Date, StringFormat='dd.MM.yyyy'}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="DeleteToDo" Click="ButtonDeleteToDo" Background="#5EBEC4">
+                                <Image Width="10" Height="10" Source="Resources/delete.png"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name="AddToDo" Grid.Column="1" Grid.Row="0" Background="#5EBEC4" MaxHeight="50" MaxWidth="50" 
+                HorizontalAlignment="Right" Margin="0 0 10 0" Click="ButtonAddToDo">
+            <Image Source="Resources/add.png"/>
+        </Button>
+    </Grid>
+</Window>
