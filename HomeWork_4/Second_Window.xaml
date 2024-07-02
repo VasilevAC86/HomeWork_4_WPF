@@ -6,22 +6,39 @@
         xmlns:local="clr-namespace:HomeWork_4"
         mc:Ignorable="d"
         Title="Добавление нового дела" Height="450" Width="400">
+    <Window.Resources>
+        <Style x:Key="DatePickerStyle">
+            <Setter Property="DatePicker.SelectedDateFormat" Value="Long"/>
+            <Setter Property="DatePicker.BorderThickness" Value="1.5"/>
+            <Setter Property="DatePicker.BorderBrush" Value="#5EBEC4"/>
+            <Setter Property="DatePicker.Background" Value="white"/>
+            <Setter Property="DatePicker.CalendarStyle">
+                <Setter.Value>
+                    <Style TargetType="Calendar">
+                        <Setter Property="BorderThickness" Value="1.5"/>
+                        <Setter Property="BorderBrush" Value="#5EBEC4"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="7*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label FontSize="26" HorizontalAlignment="Center">Новое дело</Label>
+        <Label Style="{StaticResource HeaderStyle}" HorizontalAlignment="Center">Новое дело</Label>
         <StackPanel Grid.Row="1">
             <Label FontSize="15">Название:</Label>
-            <TextBox Margin="10 10 10 10" Name="titleToDo"></TextBox>
+            <TextBox Margin="10 10 10 10" Name="titleToDo" Style="{StaticResource TextBoxStyle}"></TextBox>
             <Label FontSize="15">Выполнить до:</Label>
-            <DatePicker Margin="10 10 10 10" Name="dateToDo"></DatePicker>
+            <DatePicker Margin="10 10 10 10" Name="dateToDo" Style="{StaticResource DatePickerStyle}"></DatePicker>
             <Label FontSize="15">Описание:</Label>
-            <TextBox Margin="10 10 10 10" Name="descriptionToDo" AcceptsReturn="True" AcceptsTab="True"></TextBox>
+            <TextBox Margin="10 10 10 10" Name="descriptionToDo" AcceptsReturn="True" AcceptsTab="True"  Style="{StaticResource TextBoxStyle}"></TextBox>
         </StackPanel>
-        <Button Name="buttonSave" Grid.Row="2" MinHeight="20" MaxWidth="120" Background="#5EBEC4" 
-                Margin="0 5 0 5" Padding="5" Click="ButtonSaveToDo" FontSize="14">Сохранить дело</Button>        
+        <Button Name="buttonSave" Grid.Row="2" Style="{StaticResource ButtonStyle}" Click="ButtonSaveToDo" Margin="0 5 0 5"
+                MaxWidth="120">Сохранить дело</Button>        
     </Grid>
 </Window>

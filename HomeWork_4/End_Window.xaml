@@ -6,6 +6,24 @@
         xmlns:local="clr-namespace:HomeWork_4"
         mc:Ignorable="d"
         Title="Список дел" Height="450" Width="400">
+    <Window.Resources>
+        <Style x:Key="DataGridStyle">
+            <Setter Property="DataGrid.AutoGenerateColumns" Value="False"/>
+            <Setter Property="DataGrid.CanUserAddRows" Value="False"/>
+            <Setter Property="DataGrid.CanUserDeleteRows" Value="False"/>
+            <Setter Property="DataGrid.AutoGenerateColumns" Value="False"/>
+            <Setter Property="DataGrid.HeadersVisibility" Value="None"/>
+            <Setter Property="DataGrid.GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="DataGrid.RowBackground" Value="White"/>
+            <Setter Property="DataGrid.AlternatingRowBackground" Value="#FFFDFAF1"/>
+            <Setter Property="DataGrid.HorizontalGridLinesBrush" Value="#5EBEC4"/>
+        </Style>
+        <Style x:Key="ProgressBarStyle">
+            <Setter Property="ProgressBar.Background" Value="White"/>
+            <Setter Property="ProgressBar.Foreground" Value="#5EBEC4"/>
+            <Setter Property="ProgressBar.Margin" Value="5 10 5 10"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -14,12 +32,13 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="7*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" FontSize="26" HorizontalAlignment="Left">
+        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource HeaderStyle}">
             Список дел
         </Label>
         <DataGrid Name="DataToDoList" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
-                  CanUserAddRows="False" AutoGenerateColumns="False">            
+                  Style="{StaticResource DataGridStyle}">            
                 <DataGrid.Columns>                
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
@@ -34,7 +53,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="DeleteToDo" Click="ButtonDeleteToDo" Background="#5EBEC4">
+                            <Button Name="DeleteToDo" Click="ButtonDeleteToDo" Style="{StaticResource ButtonStyle}">
                                 <Image Width="10" Height="10" Source="Resources/delete.png"/>
                             </Button>
                         </DataTemplate>
@@ -42,9 +61,12 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="AddToDo" Grid.Column="1" Grid.Row="0" Background="#5EBEC4" MaxHeight="50" MaxWidth="50" 
+        <Button Name="AddToDo" Grid.Column="1" Grid.Row="0" Style="{StaticResource ButtonStyle}" MaxHeight="50" MaxWidth="50" 
                 HorizontalAlignment="Right" Margin="0 0 10 0" Click="ButtonAddToDo">
             <Image Source="Resources/add.png"/>
         </Button>
+        <ProgressBar x:Name="ProgressBarEnd" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource ProgressBarStyle}"/>
+        <TextBlock x:Name="TextBlockProgress" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" MaxWidth="100" FontSize="20" FontWeight="Bold"/>
     </Grid>
 </Window>

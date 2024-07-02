@@ -26,7 +26,7 @@ namespace HomeWork_4
         public MainWindow()
         {
             InitializeComponent();
-            toDoList.Add(new ToDo("Родиться", new DateTime(2024, 01, 10), "Важно!", false));
+            toDoList.Add(new ToDo("Родиться", new DateTime(2024, 01, 10), "Важно!", true));
             toDoList.Add(new ToDo("Посадить сына", new DateTime(2024, 01, 11), "Важно!!", false));
             toDoList.Add(new ToDo("Построить дерево", new DateTime(2024, 01, 13), "Важно!!!", false));
             toDoList.Add(new ToDo("Вырастить дом", new DateTime(2024, 01, 13), "Важно!!!!", false));

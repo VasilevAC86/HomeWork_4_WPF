@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeWork_4"       
         mc:Ignorable="d"
-        Title="Список дел" Height="450" Width="400">
+        Title="Список дел" Height="450" Width="400">   
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,7 +16,7 @@
             <RowDefinition Height="7*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="26" HorizontalAlignment="Center">
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource HeaderStyle}">
             Список дел
         </Label>
         <ListBox Name="listToDo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="#FDF5DF">
@@ -30,9 +30,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>                        
         </ListBox>
-        <Button Name="buttonAdd" Grid.Column="1" Grid.Row="2" ToolTip="При добавлении дело появится в списке слева и его прийдётся выполнить" MinHeight="20" 
-                    MaxWidth="100" Background="#5EBEC4" Margin="0 5 0 5" Padding="5" Click="ButtonAddToDo_Click">Добавить дело</Button>
-        <Button Name="buttonDelete" Grid.Column="0" Grid.Row="2" MinHeight="20" MaxWidth="100" Background="#5EBEC4" 
-                Margin="0 5 0 5" Padding="5" Click="ButtonRemoveToDo_Click">Удалить дело</Button>
+        <Button Name="buttonAdd" Grid.Column="1" Grid.Row="2" Style="{StaticResource ButtonStyle}" MaxWidth="100" Margin="0 5 0 5"
+                MinHeight="20" ToolTip="При добавлении дело появится в списке слева и его прийдётся выполнить"
+                Click="ButtonAddToDo_Click">Добавить дело</Button>
+        <Button Name="buttonDelete" Grid.Column="0" Grid.Row="2" Style="{StaticResource ButtonStyle}" MaxWidth="100" Margin="0 5 0 5"
+                MinHeight="20" Click="ButtonRemoveToDo_Click">Удалить дело</Button>
     </Grid>    
 </Window>
