@@ -16,9 +16,9 @@
             <RowDefinition Height="7*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource HeaderStyle}">
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource HeaderStyle}">
             Список дел
-        </Label>
+        </TextBlock>
         <ListBox Name="listToDo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="#FDF5DF">
             <ListBox.ItemTemplate>
                 <DataTemplate>

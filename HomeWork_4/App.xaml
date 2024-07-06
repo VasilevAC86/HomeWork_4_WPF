@@ -4,22 +4,22 @@
              xmlns:local="clr-namespace:HomeWork_4"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="ButtonStyle">
-            <Setter Property="Button.Background" Value="#5EBEC4"/>
-            <Setter Property="Button.Padding" Value="5"/>
-            <Setter Property="Button.FontFamily" Value="Cascadia Mono"/>
-            <Setter Property="Button.BorderThickness" Value="0"/>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#5EBEC4"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontFamily" Value="Cascadia Mono"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        <Style x:Key="TextBoxStyle">
-            <Setter Property="TextBox.BorderThickness" Value="1.5"/>
-            <Setter Property="TextBox.BorderBrush" Value="#5EBEC4"/>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="BorderBrush" Value="#5EBEC4"/>
         </Style>
-        <Style x:Key="HeaderStyle">
-            <Setter Property="Label.FontSize" Value="26"/>
-            <Setter Property="Label.Margin" Value="5"/>
-            <Setter Property="Label.Foreground" Value="#5EBEC4"/>
-            <Setter Property="Label.FontFamily" Value="Cascadia Mono"/>
-            <Setter Property="Label.FontWeight" Value="Bold"/>
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="#5EBEC4"/>
+            <Setter Property="FontFamily" Value="Cascadia Mono"/>
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
     </Application.Resources>
 </Application>

@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="Добавление нового дела" Height="450" Width="400">
     <Window.Resources>
-        <Style x:Key="DatePickerStyle">
-            <Setter Property="DatePicker.SelectedDateFormat" Value="Long"/>
-            <Setter Property="DatePicker.BorderThickness" Value="1.5"/>
-            <Setter Property="DatePicker.BorderBrush" Value="#5EBEC4"/>
-            <Setter Property="DatePicker.Background" Value="white"/>
-            <Setter Property="DatePicker.CalendarStyle">
+        <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+            <Setter Property="SelectedDateFormat" Value="Long"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="BorderBrush" Value="#5EBEC4"/>
+            <Setter Property="Background" Value="white"/>
+            <Setter Property="CalendarStyle">
                 <Setter.Value>
                     <Style TargetType="Calendar">
                         <Setter Property="BorderThickness" Value="1.5"/>
@@ -29,7 +29,7 @@
             <RowDefinition Height="7*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Style="{StaticResource HeaderStyle}" HorizontalAlignment="Center">Новое дело</Label>
+        <TextBlock Style="{StaticResource HeaderStyle}" HorizontalAlignment="Center">Новое дело</TextBlock>
         <StackPanel Grid.Row="1">
             <Label FontSize="15">Название:</Label>
             <TextBox Margin="10 10 10 10" Name="titleToDo" Style="{StaticResource TextBoxStyle}"></TextBox>
