@@ -8,19 +8,27 @@
         Title="Добавление нового дела" Height="450" Width="400">
     <Window.Resources>
         <Style x:Key="DatePickerStyle" TargetType="DatePicker">
-            <Setter Property="SelectedDateFormat" Value="Long"/>
-            <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="BorderBrush" Value="#5EBEC4"/>
-            <Setter Property="Background" Value="white"/>
-            <Setter Property="CalendarStyle">
-                <Setter.Value>
-                    <Style TargetType="Calendar">
-                        <Setter Property="BorderThickness" Value="1.5"/>
-                        <Setter Property="BorderBrush" Value="#5EBEC4"/>
-                        <Setter Property="Background" Value="White"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
+            <Style.Setters>
+                <Setter Property="SelectedDateFormat" Value="Long"/>
+                <Setter Property="BorderThickness" Value="1.5"/>
+                <Setter Property="BorderBrush" Value="#5EBEC4"/>
+                <Setter Property="Background" Value="white"/>
+                <Setter Property="CalendarStyle">
+                    <Setter.Value>
+                        <Style TargetType="Calendar">
+                            <Setter Property="BorderThickness" Value="1.5"/>
+                            <Setter Property="BorderBrush" Value="#5EBEC4"/>
+                            <Setter Property="Background" Value="White"/>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="#FFFFFAD6"/>
+                    <Setter Property="BorderThickness" Value="2"/>                    
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>

@@ -16,12 +16,12 @@ namespace HomeWork_4.src
         {
             Doing = false;
         }
-        public ToDo(string title, DateTime date, string description, bool doind) 
+        public ToDo(string title, DateTime date, string description, bool doing) 
         { 
             this.Title = title;
             this.Date = date;
             this.Description = description;
-            this.Doing = doind;
+            this.Doing = doing;
         }     
     }
 }

@@ -13,44 +13,74 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using HomeWork_4.src;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace HomeWork_4
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public static List<ToDo> toDoList = new List<ToDo>();       
+        public List<ToDo> TodoList;
+        public List<ToDo> todoList
+        {
+            get { return TodoList; }
+            set
+            {
+                todoList = value;
+                OnPropertyChanged();
+            }
+        }
+        public int CountDoing { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            toDoList.Add(new ToDo("Родиться", new DateTime(2024, 01, 10), "Важно!", true));
-            toDoList.Add(new ToDo("Посадить сына", new DateTime(2024, 01, 11), "Важно!!", false));
-            toDoList.Add(new ToDo("Построить дерево", new DateTime(2024, 01, 13), "Важно!!!", false));
-            toDoList.Add(new ToDo("Вырастить дом", new DateTime(2024, 01, 13), "Важно!!!!", false));
-            toDoList.Add(new ToDo("Умереть", new DateTime(2024, 01, 15), "Важно!!!!!", false));
-            RefreshToDoList();
-        }
+            DataContext = this;
+            TodoList = new List<ToDo>();
+            TodoList.Add(new ToDo("Родиться", new DateTime(2024, 01, 10), "Важно!", true));
+            TodoList.Add(new ToDo("Посадить сына", new DateTime(2024, 01, 11), "Важно!!", false));
+            TodoList.Add(new ToDo("Построить дерево", new DateTime(2024, 01, 13), "Важно!!!", false));
+            TodoList.Add(new ToDo("Вырастить дом", new DateTime(2024, 01, 13), "Важно!!!!", false));
+            TodoList.Add(new ToDo("Умереть", new DateTime(2024, 01, 15), "Важно!!!!!", false));
 
-        private void RefreshToDoList()
-        {
-            listToDo.ItemsSource = null;
-            listToDo.ItemsSource = toDoList;
+            DataToDoList.ItemsSource = TodoList;
+            OnPropertyChanged();
         }
-
-        private void ButtonRemoveToDo_Click(object sender, RoutedEventArgs e)
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged()
         {
-            toDoList.Remove(listToDo.SelectedItem as ToDo);
-            RefreshToDoList();
+            CountDoing = TodoList.Where(e => e.Doing == true).ToList().Count;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TodoList"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CountDoing"));
         }
-
-        private void ButtonAddToDo_Click(object sender, RoutedEventArgs e)
+        private void ButtonDeleteToDo(object sender, RoutedEventArgs e)
         {
-            Second_Window second_Window = new Second_Window();            
+            TodoList.Remove((ToDo)DataToDoList.SelectedItem);
+            DataToDoList.ItemsSource = null;
+            DataToDoList.ItemsSource = TodoList;
+            OnPropertyChanged();
+        }
+        private void ButtonAddToDo(object sender, RoutedEventArgs e)
+        {
+            Second_Window second_Window = new Second_Window();
             second_Window.Show();
-            second_Window.Owner = this;                        
+            second_Window.Owner = this;
+            OnPropertyChanged();
+        }
+        private void CheckboxEnableToDo_Checked(object sender, RoutedEventArgs e)
+        {
+            if (DataToDoList.SelectedItem == null || AddToDo == null) return;
+            TodoList[DataToDoList.SelectedIndex].Doing = true;
+            OnPropertyChanged();
+        }
+        private void CheckboxEnableToDo_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (DataToDoList.SelectedItem == null || AddToDo == null) return;            
+            TodoList[DataToDoList.SelectedIndex].Doing = false;
+            OnPropertyChanged();
         }
     }
 }
+

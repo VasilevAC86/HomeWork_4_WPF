@@ -56,17 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="End_Window.xaml.cs">
-      <DependentUpon>End_Window.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Second_Window.xaml.cs">
       <DependentUpon>Second_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="src\ToDo.cs" />
-    <Page Include="End_Window.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
