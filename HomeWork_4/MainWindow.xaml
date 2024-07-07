@@ -6,26 +6,53 @@
         xmlns:local="clr-namespace:HomeWork_4"       
         mc:Ignorable="d"
         Title="Список дел" Height="450" Width="400">
-    <Window.Resources>
-        <Style x:Key="DataGridStyle" TargetType="DataGrid">
-            <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="CanUserDeleteRows" Value="False"/>
-            <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="HeadersVisibility" Value="None"/>
-            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
-            <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#FFFDFAF1"/>
-            <Setter Property="HorizontalGridLinesBrush" Value="#5EBEC4"/>
-        </Style>
+    <Window.Resources>        
         <Style x:Key="ProgressBarStyle" TargetType="ProgressBar">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="#5EBEC4"/>
             <Setter Property="Margin" Value="5 10 5 10"/>
         </Style>
-        <Style x:Key="Counter" TargetType="TextBlock">
+        <Style x:Key="CounterStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="UnderlineStyle" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=checkBoxToDo, Path=IsChecked}" Value="True">
+                    <Setter Property="TextDecorations" Value="Strikethrough"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ListBoxItemStyle" TargetType="ListBox">
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <local:DateTimeLessDateConverter x:Key="LessDayConverter"/>
+        <local:DateTimeTodayDateConverter x:Key="TodayConverter"/>
+        <local:DateTimeTomorrowDateConverter x:Key="TomorrowConverter"/>
+        <Style x:Key="ColorDateStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Green">
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource LessDayConverter}}" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource TodayConverter}}" Value="True">
+                    <Setter Property="Foreground" Value="#FFEA6A20"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource TomorrowConverter}}" Value="True">
+                    <Setter Property="Foreground" Value="#DAA520"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>
@@ -41,42 +68,47 @@
         <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource HeaderStyle}">
             Список дел
         </TextBlock>
-        <DataGrid Name="DataToDoList" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
-                  Style="{StaticResource DataGridStyle}" HorizontalContentAlignment="Stretch">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox Name="checkboxToDo" Checked="CheckboxEnableToDo_Checked" 
-                                      Unchecked="CheckboxEnableToDo_Unchecked" IsChecked="{Binding Path=Doing}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Width="1.75*" Binding="{Binding Path=Title}"/>
-                <DataGridTextColumn Width="1*" Binding="{Binding Path=Date, StringFormat='dd.MM.yyyy'}"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="DeleteToDo" Click="ButtonDeleteToDo" Style="{StaticResource ButtonStyle}">
+        <ListBox x:Name="DataToDoList" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ListBoxItemStyle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>                   
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="265"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                        <CheckBox x:Name="checkBoxToDo" IsChecked="{Binding Path=Doing}" 
+                                  Checked="CheckboxEnableToDo_Checked"
+                                  Unchecked="CheckboxEnableToDo_Unchecked"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=Title}" HorizontalAlignment="Left"
+                                   Style="{StaticResource UnderlineStyle}"/>
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Path=Description}"/>
+                        <TextBlock Grid.Column="2" Grid.RowSpan="2" Style="{StaticResource ColorDateStyle}"
+                                   Text="{Binding Path=Date, StringFormat='dd.MM.yyyy'}" 
+                                   HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <Button Name="DeleteToDo" Grid.Column="3" Grid.RowSpan="2" VerticalAlignment="Center"
+                                Click="ButtonDeleteToDo" Style="{StaticResource ButtonStyle}">
                                 <Image Width="10" Height="10" Source="Resources/delete.png"/>
                             </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                        </Grid>                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Button Name="AddToDo" Grid.Column="1" Grid.Row="0" Style="{StaticResource ButtonStyle}" MaxHeight="50" MaxWidth="50" 
                 HorizontalAlignment="Right" Margin="0 0 10 0" Click="ButtonAddToDo">
             <Image Source="Resources/add.png"/>
         </Button>
-        <ProgressBar x:Name="ProgressBarEnd" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource ProgressBarStyle}"
-                     Maximum="{Binding Path=todoList.Count, Mode=OneWay}"
-                     Minimum="0"
-                     Value="{Binding CountDoing, Mode=OneWay}"/>
+        <ProgressBar x:Name="ProgressBar" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource ProgressBarStyle}"                     
+                     Minimum="0" Maximum="{Binding Path=todoList.Count}" Value="{Binding Path=CountDoing}"/>
         <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Style="{StaticResource Counter}" Text="{Binding Path=CountDoing, Mode=OneWay}"/>
-            <TextBlock Style="{StaticResource Counter}" Text=" / "/>
-            <TextBlock Style="{StaticResource Counter}" Text="{Binding Path=todoList.Count, Mode=OneWay}"/>
+            <TextBlock Style="{StaticResource CounterStyle}" Text="{Binding Path=CountDoing, Mode=OneWay}"/>
+            <TextBlock Style="{StaticResource CounterStyle}" Text=" / "/>
+            <TextBlock Style="{StaticResource CounterStyle}" Text="{Binding Path=todoList.Count, Mode=OneWay}"/>
         </WrapPanel>
     </Grid>
 </Window>

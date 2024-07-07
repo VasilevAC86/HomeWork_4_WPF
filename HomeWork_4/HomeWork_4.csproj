@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DateTimeLessDateConverter.cs" />
+    <Compile Include="DateTimeTodayDateConverter.cs" />
+    <Compile Include="DateTimeTomorrowDateConverter.cs" />
     <Compile Include="Second_Window.xaml.cs">
       <DependentUpon>Second_Window.xaml</DependentUpon>
     </Compile>
