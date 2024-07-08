@@ -72,14 +72,15 @@ namespace HomeWork_4
             OnPropertyChanged();
         }
         private void CheckboxEnableToDo_Checked(object sender, RoutedEventArgs e)
-        {
-            // sender as CheckBox - когда галочка нажата, благодаря обработчику событий, не надо писать код для изменения ToDoList
+        {            
             if ((sender as CheckBox).DataContext as ToDo == null || AddToDo == null) return; 
+            ((sender as CheckBox).DataContext as ToDo).Doing = true;
             OnPropertyChanged();
         }
         private void CheckboxEnableToDo_Unchecked(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).DataContext as ToDo == null || AddToDo == null) return;
+            ((sender as CheckBox).DataContext as ToDo).Doing = false;
             OnPropertyChanged();
         }
         private void RefreshToDoList()
